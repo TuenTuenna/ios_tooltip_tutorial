@@ -111,9 +111,9 @@ class ViewController: UIViewController {
             // 툴팁 설정
             var preferences = EasyTipView.globalPreferences
 //            preferences.drawing.backgroundColor = bottomRightBtn.backgroundColor!
-            preferences.drawing.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-            preferences.drawing.borderWidth = 10
-            preferences.drawing.borderColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
+            preferences.drawing.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+            preferences.drawing.borderWidth = 5
+            preferences.drawing.borderColor = #colorLiteral(red: 0.9098039269, green: 0.7971155674, blue: 0, alpha: 1)
 
             preferences.animating.dismissTransform = CGAffineTransform(translationX: 0, y: -15)
             preferences.animating.showInitialTransform = CGAffineTransform(translationX: 0, y: 15)
@@ -126,12 +126,41 @@ class ViewController: UIViewController {
             preferences.positioning.contentHInset = 5
             preferences.positioning.contentVInset = 5
             
-            let contentView = UIImageView(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
-            contentView.image = UIImage(named: "dev_jeongDaeRi")
+//            let contentView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+            let contentView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 0))
+            
+            contentView.translatesAutoresizingMaskIntoConstraints = false
+            
+            contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
+            
+            let myImgView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+            myImgView.image = UIImage(named: "dev_jeongDaeRi")
+            contentView.addSubview(myImgView)
+            
+            myImgView.translatesAutoresizingMaskIntoConstraints = false
+            myImgView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+            myImgView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+            myImgView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            myImgView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15).isActive = true
+            
+            let myLabel = UILabel(frame: .zero)
+            myLabel.text = "안녕하세요?!\n오늘도 빡코딩?!🔥👨‍💻"
+            myLabel.font = UIFont.boldSystemFont(ofSize: 10)
+            myLabel.numberOfLines = 0
+            myLabel.textColor = .white
+            contentView.addSubview(myLabel)
+            
+            myLabel.translatesAutoresizingMaskIntoConstraints = false
+            myLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+            myLabel.topAnchor.constraint(equalTo: myImgView.bottomAnchor, constant: 10).isActive = true
+            myLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+            
+            contentView.layoutIfNeeded()
             
             bottomTrailingToolTip = EasyTipView(contentView: contentView, preferences: preferences, delegate: self)
             
-            bottomTrailingToolTip.show(forView: self.bottomTrailingBtn)
+            
+            bottomTrailingToolTip.show(forView: bottomTrailingBtn)
             
         default:
             print("default")
